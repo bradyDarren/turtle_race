@@ -6,6 +6,8 @@ screen = Screen()
 screen.setup(width=500,height=400)
 screen.textinput("Turtle Race", "Guess which color turtle will win the race.")
 
+
+"""creation of 6 turtle objects."""
 timmy = Turtle()
 tom = Turtle()
 thomas = Turtle()
@@ -15,11 +17,13 @@ theo = Turtle()
 
 turtles = [timmy,tom,thomas, todd, tony, theo]
 colors = ["red", "blue", "green", "yellow", "orange", "purple"]
+
 upper_y_cord = 0
 lower_y_cord = 0
 
 
 
+"""Designates a color to all turtle objects and places them in a starting position."""
 for turtle in turtles:
     turtle.penup()
     turtle.shape("turtle")
@@ -32,8 +36,16 @@ for turtle in turtles:
     else:
         lower_y_cord -= 30 
         turtle.goto(x=-240, y=lower_y_cord)
+
+for turtle in turtles:
+    turtle.speed("slowest")
+    if turtle.xcor() != 250:
+        turtle.forward(random.choice(range(random.choice(range(5,20,5)))))
         
 
-# timmy.goto(x=-240,y=0)
+# for _ in range(30):
+#     timmy.speed("slowest")
+#     timmy.forward(random.choice(range(5,20,5)))
+#     print(timmy.position())
 
 screen.exitonclick()
