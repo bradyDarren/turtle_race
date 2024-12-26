@@ -31,7 +31,7 @@ game_on = True
 
 while game_on: 
     for turtle in turtles: 
-        if turtle.xcor() >= 250:
+        if turtle.xcor() >= 220:
             game_on = False 
             wining_color = turtle.pencolor()
             if user_input != wining_color:
@@ -39,7 +39,7 @@ while game_on:
             else: 
                 print(f"YOU WIN!! You guessed the correct color.")
         
-        random_distance = random.randint(5,20)
+        random_distance = random.randint(0,10)
         turtle.forward(random_distance)
 
 screen.exitonclick()
