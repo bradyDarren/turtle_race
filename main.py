@@ -4,48 +4,42 @@ import random
 
 screen = Screen()
 screen.setup(width=500,height=400)
-screen.textinput("Turtle Race", "Guess which color turtle will win the race.")
+user_input = screen.textinput("Turtle Race", "Guess which color turtle will win the race.")
 
 
 """creation of 6 turtle objects."""
-timmy = Turtle()
-tom = Turtle()
-thomas = Turtle()
-todd = Turtle()
-tony = Turtle()
-theo = Turtle()
-
-turtles = [timmy,tom,thomas, todd, tony, theo]
+turtles = [Turtle(shape="turtle") for _ in range(6)]
 colors = ["red", "blue", "green", "yellow", "orange", "purple"]
 
+start_x = -240
 upper_y_cord = 0
 lower_y_cord = 0
 
-
-
 """Designates a color to all turtle objects and places them in a starting position."""
-for turtle in turtles:
+for i, turtle in enumerate(turtles):
     turtle.penup()
-    turtle.shape("turtle")
-    rand_color = random.choice(colors)
+    rand_color = colors.pop(random.randint(0,len(colors)-1))
     turtle.color(rand_color)
-    colors.remove(rand_color)
-    if turtles.index(turtle) %  2 == 0:
-        turtle.goto(x=-240, y=upper_y_cord)
+    if i %  2 == 0:
+        turtle.goto(x=start_x, y=upper_y_cord)
         upper_y_cord += 30
     else:
         lower_y_cord -= 30 
-        turtle.goto(x=-240, y=lower_y_cord)
+        turtle.goto(x=start_x, y=lower_y_cord)
 
-for turtle in turtles:
-    turtle.speed("slowest")
-    if turtle.xcor() != 250:
-        turtle.forward(random.choice(range(random.choice(range(5,20,5)))))
+game_on = True
+
+while game_on: 
+    for turtle in turtles: 
+        if turtle.xcor() >= 250:
+            game_on = False 
+            wining_color = turtle.pencolor()
+            if user_input != wining_color:
+                print(f"SORRY!!! You guessed incorrectly. The correct color was {wining_color}.")
+            else: 
+                print(f"YOU WIN!! You guessed the correct color.")
         
-
-# for _ in range(30):
-#     timmy.speed("slowest")
-#     timmy.forward(random.choice(range(5,20,5)))
-#     print(timmy.position())
+        random_distance = random.randint(5,20)
+        turtle.forward(random_distance)
 
 screen.exitonclick()
