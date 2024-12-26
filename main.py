@@ -15,13 +15,24 @@ theo = Turtle()
 
 turtles = [timmy,tom,thomas, todd, tony, theo]
 colors = ["red", "blue", "green", "yellow", "orange", "purple"]
-y_cord = 0
+upper_y_cord = 0
+lower_y_cord = 0
+
+
 
 for turtle in turtles:
+    turtle.penup()
     turtle.shape("turtle")
-    turtle.color(random.choice(colors))
-    turtle.goto(x=-240, y=y_cord)
-    y_cord += 20
+    rand_color = random.choice(colors)
+    turtle.color(rand_color)
+    colors.remove(rand_color)
+    if turtles.index(turtle) %  2 == 0:
+        turtle.goto(x=-240, y=upper_y_cord)
+        upper_y_cord += 30
+    else:
+        lower_y_cord -= 30 
+        turtle.goto(x=-240, y=lower_y_cord)
+        
 
 # timmy.goto(x=-240,y=0)
 
